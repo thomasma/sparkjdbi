@@ -1,9 +1,6 @@
 package com.tryout;
 
 import static spark.Spark.after;
-import spark.Filter;
-import spark.Request;
-import spark.Response;
 
 import com.tryout.db.DB;
 import com.tryout.routes.HelloWorldRoutes;
@@ -20,11 +17,8 @@ public class Application {
 
 		// after filter (for all routes)...
 		// you can be route specific using new Filter("/hello/*")
-		after(new Filter() {
-			@Override
-			public void handle(Request request, Response response) {
-				response.header("yourheader", "header value here");
-			}
+		after((request, response) -> {
+			response.header("yourheader", "header value here");
 		});
 	}
 }
